@@ -1,5 +1,5 @@
 const path = require("path");
-const { processLogs } = require("./service/logs-service");
+const { processLogs } = require("./src/service/logs-service");
 
 const fileName = process.argv[2] || "logs.log";
 const inputFile = path.join("input", fileName);

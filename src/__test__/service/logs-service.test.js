@@ -4,8 +4,8 @@ const { processLogs } = require("../../service/logs-service");
 
 const testInputDir = path.join(__dirname, "temp_input");
 const testReportDir = path.join(__dirname, "temp_report");
-const testInputDirStr = path.join("__test__", "service", "temp_input");
-const testReportDirStr = path.join("__test__", "service", "temp_report");
+const testInputDirStr = path.join("src", "__test__", "service", "temp_input");
+const testReportDirStr = path.join("src", "__test__", "service", "temp_report");
 
 beforeAll(() => {
   fs.mkdirSync(testInputDir, { recursive: true });

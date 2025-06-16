@@ -1,14 +1,8 @@
-const fs = require("fs");
 const path = require("path");
 const { processLogs } = require("./service/logs-service");
 
-const inputFile = path.join("input", "logs.log");
-const fullInputPath = path.join(process.cwd(), inputFile);
-
-if (!fs.existsSync(fullInputPath)) {
-    console.error(`File not found: ${fullInputPath}`);
-}
-
+const fileName = process.argv[2] || "logs.log";
+const inputFile = path.join("input", fileName);
 const reportDir = processLogs(inputFile);
 
 if (reportDir) {

@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "log": "node index.js",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },

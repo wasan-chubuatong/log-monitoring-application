@@ -20,6 +20,18 @@ function parseTime(timeStr) {
   return hour * 3600 + minute * 60 + second;
 }
 
+function formatDuration(seconds) {
+  if (seconds < 0) {
+    throw new Error(`Invalid duration (Minus): ${seconds}`);
+  }
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  const minPart = `${mins} minute${mins > 1 ? "s" : ""}`;
+  const secPart = `${secs} second${secs > 1 ? "s" : ""}`;
+  return `${minPart} ${secPart}`;
+}
+
 module.exports = {
-  parseTime
+  parseTime,
+  formatDuration
 }

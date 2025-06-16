@@ -1,4 +1,4 @@
-const { parseTime } = require('../../utils/time')
+const { parseTime, formatDuration } = require('../../utils/time')
 
 describe("parseTime", () => {
   test("should convert HH:MM:SS to seconds", () => {
@@ -30,4 +30,23 @@ describe("parseTime", () => {
   test("throws specific error for syntax issue", () => {
     expect(() => parseTime("01:01")).toThrow("Invalid time format (HH:MM:SS)");
   });
+});
+
+
+describe("formatDuration", () => {
+  test("should format duration correctly", () => {
+    expect(formatDuration(0)).toBe("0 minute 0 second");
+    expect(formatDuration(1)).toBe("0 minute 1 second");
+    expect(formatDuration(61)).toBe("1 minute 1 second");
+    expect(formatDuration(122)).toBe("2 minutes 2 seconds");
+    expect(formatDuration(359)).toBe("5 minutes 59 seconds");
+    expect(formatDuration(659)).toBe("10 minutes 59 seconds");
+    expect(formatDuration(3600)).toBe("60 minutes 0 second");
+    expect(formatDuration(86400)).toBe("1440 minutes 0 second");
+  });
+
+  test("throws specific error for negetive number", () => {
+    expect(() => formatDuration(-1)).toThrow("Invalid duration (Minus): -1");
+  });
+
 });

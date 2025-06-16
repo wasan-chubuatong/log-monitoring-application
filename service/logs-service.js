@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { parseLogs, evaluateJobs } = require("../utils/logParser");
+const { formatDuration } = require("../utils/time");
 
 function processLogs(inputPath, outputFolder = "report") {
   const fileName = path.basename(inputPath);
@@ -19,7 +20,8 @@ function processLogs(inputPath, outputFolder = "report") {
 
   results.forEach(({ pid, description, status, duration }) => {
     if (!duration) return;
-    const message = `PID ${pid} (${description}) took ${duration} seconds.\n`;
+    const timeStr = formatDuration(duration);
+    const message = `PID ${pid} (${description}) took ${timeStr}.\n`;
     if (status === "WARNING") warnMessages.push(message);
     else if (status === "ERROR") errorMessages.push(message);
   });

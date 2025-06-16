@@ -5,3 +5,5 @@ coverage
 # Dependency directories
 node_modules/
 jspm_packages/
+
+/report

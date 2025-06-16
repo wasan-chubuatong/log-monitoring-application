@@ -1,0 +1,14 @@
+{
+  "name": "log-monitoring-application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Wasan Chubuatong",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^30.0.0"
+  }
+}

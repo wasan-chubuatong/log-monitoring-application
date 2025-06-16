@@ -20,14 +20,21 @@ function processLogs(inputPath, outputFolder = "report") {
 
   results.forEach(({ pid, description, status, duration }) => {
     if (!duration) return;
-    const timeStr = formatDuration(duration);
-    const message = `PID ${pid} (${description}) took ${timeStr}.\n`;
-    if (status === "WARNING") warnMessages.push(message);
-    else if (status === "ERROR") errorMessages.push(message);
+    if (status === "WARNING") warnMessages.push(createMessage({ pid, description, duration}));
+    else if (status === "ERROR") errorMessages.push(createMessage({ pid, description, duration}));
   });
+  const reportDir = path.join(process.cwd(), outputFolder, fileName);
 
+  return createReportFile(warnMessages, errorMessages, reportDir);
+}
+
+function createMessage({ pid, description, duration }) {
+  const timeStr = formatDuration(duration);
+  return `PID ${pid} (${description}) took ${timeStr}.\n`;
+}
+
+function createReportFile(warnMessages, errorMessages, reportDir) {
   if (warnMessages.length || errorMessages.length) {
-    const reportDir = path.join(process.cwd(), outputFolder, fileName);
     fs.mkdirSync(reportDir, { recursive: true });
 
     if (warnMessages.length) {

@@ -1,11 +1,11 @@
 const { STATUS } = require("../constant");
+const { parseTime } = require("./time");
 
 function parseLogs(logLines) {
   const jobs = {};
   for (const line of logLines) {
     const [time, description, status, pid] = line.split(",").map(s => s.trim());
-    const [hour, minute, second] = time.split(":").map(Number);
-    const seconds = hour * 3600 + minute * 60 + second;
+    const seconds = parseTime(time);
     if (!jobs[pid]) {
       jobs[pid] = { description, start: null, end: null };
     }
